@@ -1,22 +1,28 @@
 package com.example.project;
 
+/**
+ * A calculator to get information about two coordinates and the line formed between them
+ * @author Andy
+ */
 public class LinearCalculator {
     // FOR EXTRA CREDIT
     // you should copy and paste all of your code from the LinearCalculator class
     // but NOT printInfo(). Please update it below
 
-    // INSTANCE VARIABLES
-    // 4 INTEGER variables (name them: x1,x2,y1,y2)
-    int x1;
-    int x2;
-    int y1;
-    int y2;
+    /** The x value of the first coordinate */
+    private int x1;
+    /** The y value of the first coordinate */
+    private int x2;
+    /** The x value of the second coordinate */    
+    private int y1;
+    /** The y value of the second coordinate */
+    private int y2;
 
-    // CONSTRUCTOR
-    // 1 constructor with 2 String parameters. Each parameter represents a
-    // coordinate.
-    // For example, "(1,2)" and "(3,4)" would be two parameter values
-    // You will have to parse the string into 4 integers, representing the 2 points.
+    /**
+     * Creates a new LinearCalculator instance
+     * @param coord1 The first coordinate as a string (no spaces, ex: "(0,1)")
+     * @param coord2 The second coordinate as a string (no spaces, ex: "(0,1)")
+     */
     public LinearCalculator(String coord1, String coord2) {
         int openParenIndex = coord1.indexOf("(");
         int closeParenIndex = coord1.indexOf(")");
@@ -31,42 +37,74 @@ public class LinearCalculator {
     }
 
     // METHODS
-    // getters and setters for the 4 instance variables (8 methods total)
+    /**
+     * Getter method for the x value of the first coordinate
+     * @return The x value
+     */
     public int getX1() {
         return x1;
     }
 
+    /**
+     * Getter method for the y value of the first coordinate
+     * @return The y value
+     */
     public int getY1() {
         return y1;
     }
 
+    /**
+     * Getter method for the x value of the second coordinate
+     * @return The x value
+     */
     public int getX2() {
         return x2;
     }
 
+    /**
+     * Getter method for the y value of the second coordinate
+     * @return The y value
+     */
     public int getY2() {
         return y2;
     }
 
+    /**
+     * Setter method for the x value of the first coordinate
+     * @param x1 The new x value
+     */
     public void setX1(int x1) {
         this.x1 = x1;
     }
 
+    /**
+     * Setter method for the y value of the first coordinate
+     * @param y1 The new y value
+     */
     public void setY1(int y1) {
         this.y1 = y1;
     }
 
+    /**
+     * Setter method for the x value of the second coordinate
+     * @param x2 The new x value
+     */
     public void setX2(int x2) {
         this.x2 = x2;
     }
 
+    /**
+     * Setter method for the y value of the second coordinate
+     * @param y2 The new y value
+     */
     public void setY2(int y2) {
         this.y2 = y2;
     }
 
-    // distance() -> returns a double.
-    // calculates the distance between the two points to the nearest HUNDREDTH and
-    // returns the value.
+    /**
+     * Calculates and returns the distance between the two points
+     * @return The distance between the points, rounded to the nearest hundredth
+     */
     public double distance() {
         // sqrt((x2-x1)^2 + (y2-y1)^2)
         int xDiff = x2 - x1;
@@ -76,10 +114,10 @@ public class LinearCalculator {
         return roundedToHundredth(Math.sqrt(xDiffSquared + yDiffSquared));
     }
 
-    // yInt() -> returns a double.
-    // calculates the y intercept of the equation and returns the value to the
-    // nearest HUNDREDTH
-    // if y-int if undefined, should return -999.99
+    /**
+     * Calculates and returns the y-intercept of the line produced from the two points
+     * @return The y-intercept, rounded to the nearest hundredth, or <code>-999.99</code> if undefined
+     */
     public double yInt() {
         // y=mx+b
         // y-mx=b
@@ -91,10 +129,10 @@ public class LinearCalculator {
         return roundedToHundredth(y1 - slope() * x1);
     }
 
-    // slope() -> returns a double.
-    // calculates the slope of the equations and returns the value to the nearest
-    // HUNDREDTH
-    // if slope is undefined, should return -999.99
+    /**
+     * Calculates and returns the slope of the line produced from the two points
+     * @return The slope, rounded to the nearest hundredth, or <code>-999.99</code> if undefined
+     */
     public double slope() {
         // rise/run
         double deltaY = y2 - y1;
@@ -105,11 +143,10 @@ public class LinearCalculator {
         return roundedToHundredth(deltaY / deltaX);
     }
 
-    // equations() -> returns a String.
-    // calculates the final equation in y=mx+b form and returns the string
-    // if the equation has no slope, the equation should return -> "undefined"
-    // HINT: You may need other custom methods to decrease the amount of code in the
-    // equations() method
+    /**
+     * Calculates and returns the equation of the line produced by the two points
+     * @return The equation of the line, in the form y=mx+b, or <code>undefined</code> if the slope is undefined
+     */
     public String equation() {
         if (x2 - x1 == 0) {
             return "undefined";
@@ -127,14 +164,29 @@ public class LinearCalculator {
         return equation;
     }
 
-    // roundedToHundredth(double x)-> returns double
-    // calculates the input to the nearest hundredth and returns that value
+    /**
+     * Rounds the input to the nearest hundredth
+     * @param x The number to be rounded
+     * @return The rounded number
+     */
     public double roundedToHundredth(double x) {
         return Math.round(x * 100) / 100.0;
     }
 
-    // You will need to concatenate to the string
-    // the results from findSymmetry() and Midpoint()
+    /**
+     * Returns information about the two points and the line produced
+     * <p>Information returned:
+     * <ul>
+     * <li>The two points
+     * <li>The equation of the line produced
+     * <li>The slope of the line
+     * <li>The y-intercept of the line
+     * <li>The distance between the points
+     * <li>The symmetry between the points
+     * <li>The midpoint of the points
+     * </ul>
+     * @return The string containing the information
+     */
     public String printInfo() {
         String str = "The two points are: (" + x1 + "," + y1 + ")";
         str += " and " + "(" + x2 + "," + y2 + ")";
@@ -147,13 +199,10 @@ public class LinearCalculator {
         return str;
     }
 
-    // findSymmetry()-> returns a string
-    // the method should determine if there is symmetry between the two points
-    // there should be 4 return statements
-    // return "Symmetric about the x-axis";
-    // return "Symmetric about the y-axis";
-    // return "Symmetric about the origin";
-    // return "No symmetry";
+    /**
+     * Finds and returns the symmetry between the two points, if any
+     * @return String showing if the points are symmetric or not
+     */
     public String findSymmetry() {
         boolean sameX = x1 == x2;
         boolean sameY = y1 == y2;
@@ -171,9 +220,10 @@ public class LinearCalculator {
         return "No symmetry";
     }
 
-    // Midpoint()->return a string
-    // the method should calculate the midpoint between the two points
-    // it should return "The midpoint of this line is: (0,0)";
+    /**
+     * Finds and returns the midpoint of the two points, as a string
+     * @return A sentence showing the midpoint
+     */
     public String Midpoint() {
         double midpointX = (x1 + x2) / 2.0;
         double midpointY = (y1 + y2) / 2.0;
